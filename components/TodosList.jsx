@@ -1,6 +1,6 @@
-import { View, FlatList, Text, StyleSheet } from "react-native";
+import { View, FlatList, Text, StyleSheet, Pressable } from "react-native";
 
-export default function TodosList({ todos }) {
+export default function TodosList({ todos, handlePressed }) {
   return (
     <View style={styles.todosContainer}>
       <FlatList
@@ -8,10 +8,16 @@ export default function TodosList({ todos }) {
         renderItem={(itemData) => {
           return (
             <View style={styles.todoWrapper}>
-              <Text style={styles.todoText}>{itemData.item.text}</Text>
+              <Pressable
+                onPress={() => handlePressed(itemData.item.id)}
+                style={({ pressed }) => pressed && styles.pressedItem}
+              >
+                <Text style={styles.todoText}>{itemData.item.text}</Text>
+              </Pressable>
             </View>
           );
         }}
+        keyExtractor={(item) => item.id}
       ></FlatList>
     </View>
   );
@@ -23,12 +29,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   todoWrapper: {
-    borderRadius: 4,
-    backgroundColor: "#eee",
     marginBottom: 4,
+    borderRadius: 4,
   },
   todoText: {
-    color: "#222",
+    color: "#000",
+    backgroundColor: "#e3f9f6",
     padding: 8,
+  },
+  pressedItem: {
+    backgroundColor: "#fff",
   },
 });
