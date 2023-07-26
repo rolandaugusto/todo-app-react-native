@@ -30,11 +30,7 @@ export default function App() {
   return (
     <View style={styles.appContainer}>
       <View style={styles.addButton}>
-        <Button
-          title="Add New ToDo"
-          onPress={openAddTodoModal}
-          color="#e3f9f6"
-        />
+        <Button title="Add New ToDo" onPress={openAddTodoModal} color="#fff" />
       </View>
       <NewTodo
         showModal={isModalVisible}

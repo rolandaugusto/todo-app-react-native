@@ -7,14 +7,17 @@ export default function TodosList({ todos, handlePressed }) {
         data={todos}
         renderItem={(itemData) => {
           return (
-            <View style={styles.todoWrapper}>
-              <Pressable
-                onPress={() => handlePressed(itemData.item.id)}
-                style={({ pressed }) => pressed && styles.pressedItem}
-              >
+            <Pressable
+              onPress={() => handlePressed(itemData.item.id)}
+              style={({ pressed }) => [
+                styles.todoWrapper,
+                pressed && styles.pressedItem,
+              ]}
+            >
+              <View>
                 <Text style={styles.todoText}>{itemData.item.text}</Text>
-              </Pressable>
-            </View>
+              </View>
+            </Pressable>
           );
         }}
         keyExtractor={(item) => item.id}
@@ -30,14 +33,15 @@ const styles = StyleSheet.create({
   },
   todoWrapper: {
     marginBottom: 4,
-    borderRadius: 4,
+    borderRadius: 45,
+    backgroundColor: "#fff",
   },
   todoText: {
     color: "#000",
-    backgroundColor: "#e3f9f6",
-    padding: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
   pressedItem: {
-    backgroundColor: "#fff",
+    backgroundColor: "#ccc",
   },
 });
